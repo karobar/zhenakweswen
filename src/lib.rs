@@ -13,9 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+mod shapes;
 
-pub fn exported_fun() {
-    println!("Hello, world!");
+use std::path::PathBuf;
+use serde::Deserialize;
+use serde_yaml::Value;
+use crate::shapes::Polytope;
+
+pub fn parse_string(yaml_string: &str) -> Result<(), serde_yaml::Error> {
+    let polytopes: Vec<Polytope> = serde_yaml::from_str(yaml_string).expect("Could not read values");
+    println!("{:?}", polytopes);
+    Ok(())
 }
 
 #[cfg(test)]
@@ -24,7 +32,23 @@ mod tests {
     use super::*;
 
     #[test]
-    pub fn test_exported_fun() {
-        exported_fun();
+    pub fn test_parse_string() {
+        let mut resources_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+        resources_dir.push("resources");
+
+        //println!("resources dir = {}", resources_dir.display());
+
+        parse_string("\
+        ---
+        - vertices:
+            - x: 0
+              y: 0
+            - x: 4
+              y: 0
+            - x: 0
+              y: 4
+            - x: 4
+              y: 4
+        ").unwrap();
     }
 }

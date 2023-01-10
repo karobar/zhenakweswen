@@ -18,9 +18,13 @@ version = "0.1.0"
 authors = ["Travis P. <travisjpressler@gmail.com>"]
 edition = "2018"
 
+[lib]
+name = "libzhenakwesewen"
+path = "src/lib.rs"
+
 [dependencies]
-# You can remove this if your application doesn't have a command-line interface
-clap = "4.0.32"
+serde = "1.0"
+serde_yaml = "0.9"
 
 [dev-dependencies]
 # For code coverage

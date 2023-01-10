@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-fn main() {
+pub fn exported_fun() {
     println!("Hello, world!");
 }
 
@@ -24,7 +24,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_main() {
-        main();
+    pub fn test_exported_fun() {
+        exported_fun();
     }
 }

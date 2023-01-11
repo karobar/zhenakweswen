@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use crate::rules::Rule;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct Point {
@@ -9,7 +9,7 @@ pub struct Point {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Polytope {
-    vertices: Vec<Point>
+    vertices: Vec<Point>,
 }
 
 impl Polytope {
@@ -19,7 +19,9 @@ impl Polytope {
                 return Err(self.clone());
             }
         }
-        return Ok(Polytope { vertices: rule.replaced_vertices().to_vec() })
+        return Ok(Polytope {
+            vertices: rule.replaced_vertices().to_vec(),
+        });
     }
 }
 

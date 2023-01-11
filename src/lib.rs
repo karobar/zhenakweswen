@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-mod shapes;
 mod rules;
+mod shapes;
 
-use crate::shapes::Polytope;
 use crate::rules::Rule;
+use crate::shapes::Polytope;
 
 /// Parse the YAML into Shapes.
 /// TODO: Wrap the serde_yaml::Error
 pub fn parse_polytopes(yaml_string: &str) -> Result<Vec<Polytope>, serde_yaml::Error> {
-    let polytopes: Vec<Polytope> = serde_yaml::from_str(yaml_string).expect("Could not read values");
+    let polytopes: Vec<Polytope> =
+        serde_yaml::from_str(yaml_string).expect("Could not read values");
     println!("{:?}", polytopes);
     Ok(polytopes)
 }
@@ -35,6 +36,7 @@ pub fn parse_rules(yaml_string: &str) -> Result<Vec<Rule>, serde_yaml::Error> {
 
 #[cfg(test)]
 mod tests {
+    use std::path::PathBuf;
     // Note this useful idiom: importing names from outer (for mod tests) scope.
     use super::*;
 
@@ -46,7 +48,8 @@ mod tests {
 
     #[test]
     pub fn test_parse_shapes() {
-        let shapes = parse_polytopes("\
+        let shapes = parse_polytopes(
+            "\
         ---
         - vertices:
             - x: 0
@@ -57,13 +60,16 @@ mod tests {
               y: 4
             - x: 4
               y: 4
-        ").unwrap();
+        ",
+        )
+        .unwrap();
         assert_ne!(shapes.len(), 0);
     }
 
     #[test]
     pub fn test_parse_rules() {
-        let rules = parse_rules("\
+        let rules = parse_rules(
+            "\
         ---
         - matched_vertices:
           - x: 0
@@ -83,8 +89,9 @@ mod tests {
             y: 4
           - x: 4
             y: 4
-            ").unwrap();
+            ",
+        )
+        .unwrap();
         assert_ne!(rules.len(), 0);
     }
 }
-

@@ -16,10 +16,6 @@
 mod shapes;
 mod rules;
 
-use std::path::PathBuf;
-use serde::Deserialize;
-use serde_yaml::Value;
-
 use crate::shapes::Polytope;
 use crate::rules::Rule;
 

@@ -1,4 +1,3 @@
-use std::error::Error;
 use serde::{Deserialize, Serialize};
 use crate::rules::Rule;
 
@@ -14,9 +13,9 @@ pub struct Polytope {
 }
 
 impl Polytope {
-    pub fn applyRule(&self, rule: Rule) -> Result<Polytope, Polytope> {
+    pub fn apply_rule(&self, rule: Rule) -> Result<Polytope, Polytope> {
         for vertex in &(self.vertices) {
-            if !rule.matched_vertices().contains(&vertex) {
+            if !rule.matched_vertices().contains(vertex) {
                 return Err(self.clone());
             }
         }
